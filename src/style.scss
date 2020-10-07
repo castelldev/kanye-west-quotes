@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+:root {
+  --bg: #f1f3f6;
+  --primary: #555555;
+  --secondary: #4285f4;
+  --node-light: #f7f7f7;
+  --node-shadow: #e1e4ed;
+  --active-inset: #e1e4ed50;
+}
+:root,
+body {
+  height: 100%;
+  margin: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+svg {
+  width: 50vw;
+  height: auto;
+  animation: hue-cycle 3s linear, blur-out 1s ease-out forwards 3.5s;
+  filter: hue-rotate(360deg);
+  @keyframes hue-cycle {
+    100% {
+      filter: hue-rotate(0deg);
+    }
+  }
+  @keyframes blur-out {
+    70% {
+      filter: hue-rotate(30deg)blur(150px);
+    }
+    100% {
+      opacity: 0;
+      filter: hue-rotate(30deg)blur(150px);
+    }
+  }
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+}
+
+@mixin shadow($width) {
+  box-shadow: #{-$width} #{-$width} $width var(--node-light),
+    $width $width $width var(--node-shadow);
+}
+
+main {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background: var(--bg);
+  width: 330px;
+  height: 500px;
+  padding: 5px 5px;
+  border-radius: 1rem;
+  @include shadow(9px);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  transition: all 400ms ease;
+}
+//Mobile
+@media only screen and (max-width: 500px) {
+  body {
+    align-items: initial;
+  }
+  svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  main {
+    width: 100%;
+    height: 100vh;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+header {
+  display: grid;
+  grid: min-content / 1fr min-content;
+  grid-auto-rows: min-content;
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+}
+
+input[type="search"] {
+  background: var(--bg);
+  color: var(--primary);
+  height: 40px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  @include shadow(6px);
+  margin: 9px;
+  padding: 9px 9px 9px 18px;
+  ::placeholder {
+    color: var(--primary);
+    opacity: 0.55;
+  }
+  &::-webkit-search-cancel-button {
+    appearance: none;
+    background: center / 50% no-repeat
+      url("https://image.flaticon.com/icons/png/512/126/126497.png");
+    width: 30px;
+    height: 30px;
+    opacity: 0.4;
+    transition: opacity 150ms ease;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: 0.8;
+    }
+  }
+}
+
+button {
+  display: flex;
+  position: relative;
+  background: var(--bg);
+  width: 40px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  margin: 9px;
+  @include shadow(6px);
+  transition: box-shadow 100ms ease;
+  &:before {
+    content: "";
+    width: inherit;
+    height: inherit;
+  }
+  &.search {
+    &:before {
+      background: center / 50% no-repeat
+        url("https://image.flaticon.com/icons/png/512/126/126474.png");
+      filter: blur(10px);
+      transition: transform 150ms ease;
+      animation: focus 1s ease-out forwards;
+      @keyframes focus {
+        100% {
+          filter: blur(0px)contrast(0)sepia(100%)hue-rotate(190deg)saturate(8);
+        }
+      }
+    }
+  }
+  &.load {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    &:before {
+      background: center / 50% no-repeat
+        url("https://image.flaticon.com/icons/png/512/159/159694.png");
+      filter: contrast(0)sepia(100%)hue-rotate(190deg)saturate(8);
+      animation: breathe 2s ease both infinite;
+      @keyframes breathe {
+        50% {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  &:active {
+    $width: 4px;
+    box-shadow: #{-$width} #{-$width} $width var(--node-light),
+      $width $width $width var(--node-shadow),
+      inset 9px 9px 9px var(--active-inset);
+  }
+  &:hover {
+    &:before {
+      transform: scale(1.2);
+    }
+  }
+}
+
+section {
+  font-family: "Open Sans", sans-serif;
+  color: var(--primary);
+}
+
+article {
+  height: min-content;
+  padding: 18px 18px;
+  margin: 18px 9px;
+  border-radius: 1rem;
+  @include shadow(1px);
+  filter: blur(4px);
+  animation: pop 500ms ease forwards;
+  @keyframes pop {
+    100% {
+      filter: none;
+      @include shadow(9px);
+    }
+  }
+}

@@ -1,0 +1,290 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+:root {
+  --bg: #f1f3f6;
+  --primary: #555555;
+  --secondary: #4285f4;
+  --node-light: #f7f7f7;
+  --node-shadow: #e1e4ed;
+  --active-inset: #e1e4ed50;
+}
+
+:root,
+body {
+  height: 100%;
+  margin: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+svg {
+  width: 50vw;
+  height: auto;
+  -webkit-animation: hue-cycle 3s linear, blur-out 1s ease-out forwards 3.5s;
+          animation: hue-cycle 3s linear, blur-out 1s ease-out forwards 3.5s;
+  -webkit-filter: hue-rotate(360deg);
+          filter: hue-rotate(360deg);
+}
+@-webkit-keyframes hue-cycle {
+  100% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+}
+@keyframes hue-cycle {
+  100% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+}
+@-webkit-keyframes blur-out {
+  70% {
+    -webkit-filter: hue-rotate(30deg) blur(150px);
+            filter: hue-rotate(30deg) blur(150px);
+  }
+  100% {
+    opacity: 0;
+    -webkit-filter: hue-rotate(30deg) blur(150px);
+            filter: hue-rotate(30deg) blur(150px);
+  }
+}
+@keyframes blur-out {
+  70% {
+    -webkit-filter: hue-rotate(30deg) blur(150px);
+            filter: hue-rotate(30deg) blur(150px);
+  }
+  100% {
+    opacity: 0;
+    -webkit-filter: hue-rotate(30deg) blur(150px);
+            filter: hue-rotate(30deg) blur(150px);
+  }
+}
+body {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  background: var(--bg);
+}
+
+main {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+          align-items: center;
+  background: var(--bg);
+  width: 330px;
+  height: 500px;
+  padding: 5px 5px;
+  border-radius: 1rem;
+  box-shadow: -9px -9px 9px var(--node-light), 9px 9px 9px var(--node-shadow);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+@media only screen and (max-width: 500px) {
+  body {
+    -webkit-box-align: initial;
+            align-items: initial;
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  main {
+    width: 100%;
+    height: 100vh;
+    border: none;
+    box-shadow: none;
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+header {
+  display: grid;
+  grid: -webkit-min-content / 1fr -webkit-min-content;
+  grid: min-content / 1fr min-content;
+  grid-auto-rows: -webkit-min-content;
+  grid-auto-rows: min-content;
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+}
+
+input[type="search"] {
+  background: var(--bg);
+  color: var(--primary);
+  height: 40px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: -6px -6px 6px var(--node-light), 6px 6px 6px var(--node-shadow);
+  margin: 9px;
+  padding: 9px 9px 9px 18px;
+}
+input[type="search"] ::-webkit-input-placeholder {
+  color: var(--primary);
+  opacity: 0.55;
+}
+input[type="search"] ::-moz-placeholder {
+  color: var(--primary);
+  opacity: 0.55;
+}
+input[type="search"] :-ms-input-placeholder {
+  color: var(--primary);
+  opacity: 0.55;
+}
+input[type="search"] ::-ms-input-placeholder {
+  color: var(--primary);
+  opacity: 0.55;
+}
+input[type="search"] ::placeholder {
+  color: var(--primary);
+  opacity: 0.55;
+}
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+          appearance: none;
+  background: center/50% no-repeat url("https://image.flaticon.com/icons/png/512/126/126497.png");
+  width: 30px;
+  height: 30px;
+  opacity: 0.4;
+  -webkit-transition: opacity 150ms ease;
+  transition: opacity 150ms ease;
+}
+input[type="search"]::-webkit-search-cancel-button:hover {
+  opacity: 0.6;
+}
+input[type="search"]::-webkit-search-cancel-button:active {
+  opacity: 0.8;
+}
+
+button {
+  display: -webkit-box;
+  display: flex;
+  position: relative;
+  background: var(--bg);
+  width: 40px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  margin: 9px;
+  box-shadow: -6px -6px 6px var(--node-light), 6px 6px 6px var(--node-shadow);
+  -webkit-transition: box-shadow 100ms ease;
+  transition: box-shadow 100ms ease;
+}
+button:before {
+  content: "";
+  width: inherit;
+  height: inherit;
+}
+button.search:before {
+  background: center/50% no-repeat url("https://image.flaticon.com/icons/png/512/126/126474.png");
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+  -webkit-transition: -webkit-transform 150ms ease;
+  transition: -webkit-transform 150ms ease;
+  transition: transform 150ms ease;
+  transition: transform 150ms ease, -webkit-transform 150ms ease;
+  -webkit-animation: focus 1s ease-out forwards;
+          animation: focus 1s ease-out forwards;
+}
+@-webkit-keyframes focus {
+  100% {
+    -webkit-filter: blur(0px) contrast(0) sepia(100%) hue-rotate(190deg) saturate(8);
+            filter: blur(0px) contrast(0) sepia(100%) hue-rotate(190deg) saturate(8);
+  }
+}
+@keyframes focus {
+  100% {
+    -webkit-filter: blur(0px) contrast(0) sepia(100%) hue-rotate(190deg) saturate(8);
+            filter: blur(0px) contrast(0) sepia(100%) hue-rotate(190deg) saturate(8);
+  }
+}
+button.load {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+}
+button.load:before {
+  background: center/50% no-repeat url("https://image.flaticon.com/icons/png/512/159/159694.png");
+  -webkit-filter: contrast(0) sepia(100%) hue-rotate(190deg) saturate(8);
+          filter: contrast(0) sepia(100%) hue-rotate(190deg) saturate(8);
+  -webkit-animation: breathe 2s ease both infinite;
+          animation: breathe 2s ease both infinite;
+}
+@-webkit-keyframes breathe {
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes breathe {
+  50% {
+    opacity: 0.5;
+  }
+}
+button:active {
+  box-shadow: -4px -4px 4px var(--node-light), 4px 4px 4px var(--node-shadow), inset 9px 9px 9px var(--active-inset);
+}
+button:hover:before {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+section {
+  font-family: "Open Sans", sans-serif;
+  color: var(--primary);
+}
+
+article {
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  padding: 18px 18px;
+  margin: 18px 9px;
+  border-radius: 1rem;
+  box-shadow: -1px -1px 1px var(--node-light), 1px 1px 1px var(--node-shadow);
+  -webkit-filter: blur(4px);
+          filter: blur(4px);
+  -webkit-animation: pop 500ms ease forwards;
+          animation: pop 500ms ease forwards;
+}
+@-webkit-keyframes pop {
+  100% {
+    -webkit-filter: none;
+            filter: none;
+    box-shadow: -9px -9px 9px var(--node-light), 9px 9px 9px var(--node-shadow);
+  }
+}
+@keyframes pop {
+  100% {
+    -webkit-filter: none;
+            filter: none;
+    box-shadow: -9px -9px 9px var(--node-light), 9px 9px 9px var(--node-shadow);
+  }
+}

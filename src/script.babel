@@ -1,0 +1,131 @@
+const metadata = {
+  "theme-color": "#4496ff",
+  viewport: "width=device-width, initial-scale=1.0"
+};
+const head = document.querySelector("head");
+for (let name in metadata) {
+  const meta = document.createElement("meta");
+  meta.setAttribute("name", name);
+  meta.content = metadata[name];
+  head.prepend(meta);
+}
+
+const App = () => {
+  const Splash = () => (
+    <svg viewBox="0 0 100 125" onAnimationEnd={anim => endSplash(anim)}>
+      <path
+        d="M93.734 46.364c-.364-.361-.861-.383-1.355-.679-1.041-.623-1.565-3.314-5.128-6.398-3.563-3.084-13.561-3.174-15.646-3.231-10.128-.279-16.775.776-21.097.776v-.008c-4.324 0-10.973-1.055-21.106-.776-2.087.057-12.088.148-15.653 3.233s-4.089 5.778-5.13 6.402c-.494.295-.991.317-1.355.678s-.256 1.22-.226 2.328c.031 1.108.041 2.202.226 2.522.185.32.485.439 1.162.841.677.402.733.177 1.484 3.88.752 3.703 2.411 7.291 5.421 9.441 1.417 1.012 7.425 2.684 12.585 2.166 4.637-.465 7.79-1.681 10.117-3.293l.117.002-.001-.083c3.197-2.258 4.821-5.267 6.644-8.072 3.156-4.856 2.617-8.374 5.715-8.374v.002c3.096 0 2.558 3.516 5.712 8.37 1.822 2.803 3.445 5.811 6.641 8.068l-.001.083.117-.002c2.326 1.61 5.478 2.826 10.113 3.291 5.158.517 11.163-1.153 12.579-2.165 3.009-2.149 4.667-5.735 5.419-9.436.752-3.701.807-3.476 1.484-3.878.677-.402.977-.521 1.161-.84.185-.319.195-1.413.226-2.521.031-1.108.139-1.966-.225-2.327zm-77.08-6.308c.215-.071 7.327-.192 14.473-.316 6.801-.118 13.159-.271 13.437-.169.213.078 1.322.36 1.689 2.383l-32.604.497c1.329-1.76 2.853-2.345 3.005-2.395zm9.163 24.993c-3.079 0-5.525-.344-7.455-1.132l14.005.234c-1.9.569-4.074.898-6.55.898zm10.429-2.578l-20.697-.346a8.937 8.937 0 01-1.71-2.297l25.445.316a15.806 15.806 0 01-3.038 2.327zm4.897-4.535c-.112.161-.228.321-.347.48l-27.716-.343a17.02 17.02 0 01-.427-1.43 25.052 25.052 0 01-.139-.585l29.775.07a26.884 26.884 0 01-1.146 1.808zm2.088-3.552l-31.048-.073a36.98 36.98 0 01-.272-2.06l32.457-.368a35.61 35.61 0 01-1.137 2.501zm1.798-4.254l-33.254.377a24.301 24.301 0 01-.017-2.254l33.983-.476a30.098 30.098 0 01-.712 2.353zm1.309-5.838a16.936 16.936 0 01-.218 1.732l-34.194.479c.068-.421.157-.817.269-1.177.125-.399.266-.77.42-1.114l33.752-.514c-.005.19-.014.387-.029.594zm10.112-4.714c.277-.102 6.634.051 13.431.169 7.143.124 14.253.245 14.467.316.151.05 1.675.635 3.004 2.393l-32.59-.496c.367-2.023 1.475-2.304 1.688-2.382zm-1.774 4.718a12.894 12.894 0 01-.029-.593l33.738.514c.154.344.295.715.419 1.114.112.36.201.755.269 1.176l-34.18-.479a17.281 17.281 0 01-.217-1.732zm20.513 20.746c-2.474 0-4.648-.329-6.547-.897l13.999-.234c-1.93.787-4.374 1.131-7.452 1.131zm10.264-2.923l-20.688.346a15.764 15.764 0 01-3.037-2.326l25.435-.315a8.984 8.984 0 01-1.71 2.295zm2.895-5.479c-.127.502-.27.978-.427 1.429l-27.705.343c-.12-.159-.235-.319-.347-.48a27.108 27.108 0 01-1.145-1.807l29.762-.07c-.046.208-.092.404-.138.585zm.469-2.33l-31.035.073a35.124 35.124 0 01-1.136-2.5l32.443.367a36.06 36.06 0 01-.272 2.06zm.408-3.803l-33.24-.376a29.826 29.826 0 01-.711-2.353l33.969.476c.03.727.021 1.489-.018 2.253z"
+        fill="#DB4437"
+      />
+    </svg>
+  );
+
+  const dummy = [
+    {
+      text:
+        "My greatest pain in life is that I will never be able to see myself perform live.",
+      delay: "100ms"
+    },
+    { text: "Tweeting is legal and also therapeutic", delay: "100ms" },
+    {
+      text:
+        "People always tell you 'Be humble. Be humble.' Whe… to be amazing? Be great! Be awesome! Be awesome!",
+      delay: "100ms"
+    },
+    { text: "My greatest award is what I'm about to do.", delay: "100ms" },
+    { text: "People only get jealous when they care.", delay: "100ms" }
+  ];
+  const [quotes, setQuotes] = React.useState([]);
+  const [filtered, setFiltered] = React.useState([]);
+  const [search, setSearch] = React.useState([]);
+  const [more, loadMore] = React.useState(false);
+  const [splashEnded, setSplashEnded] = React.useState(false);
+
+  React.useEffect(() => {
+    // Acquire Random Kanye West Gems (10 first)
+    loadQuotes(10);
+  }, []);
+
+  const endSplash = anim => {
+    if (anim.animationName === "blur-out") {
+      setSplashEnded(true);
+    }
+  };
+
+  const loadQuotes = number =>
+    (async number => {
+      const quoteData = quotes;
+      for (let i = 0; i < number; i++) {
+        const response = await fetch("https://api.kanye.rest");
+        const result = await response.json();
+        quoteData.push({ text: result.quote, delay: i * 150 });
+      }
+      setQuotes([...quoteData]);
+      // Scroll to bottom
+      if (quotes.length > 11) {
+        const main = document.querySelector("main");
+        main.scroll(0, main.scrollHeight);
+      }
+    })(number);
+
+  const scrollHandler = e => {
+    if(Math.round(e.target.scrollTop) + 2 >=
+    e.target.scrollHeight - e.target.offsetHeight
+     ) {loadMore(true)} 
+  };
+
+  const filterQuotes = () => {
+    const filter = new RegExp(`(${search})+`, "i");
+    const filtered =
+      quotes.length > 0
+        ? quotes.filter(quote => filter.test(quote.text))
+        : null;
+    setFiltered([...filtered]);
+  };
+
+  searchHandler = e => {
+    e.target.value.length > 0 ? setSearch(e.target.value) : setFiltered([]);
+  };
+
+  return splashEnded === false ? (
+    <Splash />
+  ) : (
+    <main onScroll={e => scrollHandler(e)}>
+      <header>
+        <input
+          onChange={e => searchHandler(e)}
+          type="search"
+          placeholder="Search"
+          onKeyDown={e => {
+            if (e.key === "Enter") {
+              filterQuotes();
+            }
+          }}
+        />
+        <button className="search" onClick={() => filterQuotes()} />
+      </header>
+      <section>
+        {filtered.length > 0
+          ? filtered.map(({ text, delay }, index) => {
+              const style = { animationDelay: delay + "ms" };
+              return (
+                <article key={index} style={style}>
+                  {text}
+                </article>
+              );
+            })
+          : quotes.length > 0 &&
+            quotes.map(({ text, delay }, index) => {
+              const style = { animationDelay: delay + "ms" };
+              return (
+                <article key={index} style={style}>
+                  {text}
+                </article>
+              );
+            })}
+      </section>
+      {more && <button className="load" onClick={() => loadQuotes(5)} />}
+    </main>
+  );
+};
+ReactDOM.render(<App />, document.querySelector("div"));
